@@ -7,7 +7,7 @@ const sentence = "Here is a shit sentence with emoji orange blush astonished wor
 function emojiWords(sentence){
     let newArr = [];
     if ((typeof sentence) =="string"){
-        sentence = sentence.split(' ');
+        sentence = sentence.split(' ');ind
     }
 
     for(word of sentence){
@@ -43,16 +43,22 @@ function rhymeWords(sentence){
     }
 
     for (words of sentence){
-        let rhymeArr = (rhymes(words));
-        rhymeArr.sort((x,y) => y.score - x.score);
-        if (!rhymeArr[0]){
-            newArr.push(words);
-        } else {
-            newArr.push(rhymeArr[0].word);
-        }
+        newArr.push(findRhyme(words));
     }
     return newArr.join(' ');
 }
+
+function findRhyme(words){
+    let rhymeArr = (rhymes(words));
+    rhymeArr.sort((x,y) => y.score - x.score);
+    if (!rhymeArr[0]){
+        return words;
+    } else {
+        return rhymeArr[0].word;
+    }
+}
+
+
 
 const rhymeSentence = rhymeWords(emojiSentence);
 console.log(rhymeSentence);
